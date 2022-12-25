@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var names=["sagar","shashank","akshay","dada","biggboss","don"];
+        displaydata=()=>{
+            str="<ol>";
+                        for(var nm of names){
+                            str+= "<li>"+nm+"</li>";
+                            //str+=`<li>${nm}</li>`;
+                        }
+                        str="</ol>";
+                 document.getElementById("mydiv").innerHTML=str;
+        }
+        managedata=function(){
+            arr=document.getElementsByName("action");
+            for(var i=0;i<arr.length;i++){
+                if(arr[i].checked){
+                    var op=arr[i].value
+                    displaydata();
+                    break;
+                }
+                
+            }
+            switch(op){
+                case "add":
+                    nm=document.getElementById("nm").value;
+                    names.push(nm);
+                    console.log(names);
+                    displaydata();
+                    break;
+                    
+                case "delete":
+                    nm=document.getElementById("nm").value;
+                    pos=names.indexOf(nm);
+                    if(pos!=-1)
+                    names.splice(pos,1); //delete first occurance
+                    //names=names.filter(x=>x!=nm); //delete all occurance
+                    console.log(names);
+                    displaydata();
+                    break;
+                case "Modify":
+                    nm=document.getElementById("nm").value;
+                    newnm=prompt("Enter the Name");
+                    pos=names.indexOf(nm);
+                    if(pos!=-1){
+                        names.splice(pos,1,newnm);
+                        displaydata();
+                    }
+                    console.log(names);
+                    displaydata();
+                    break;
+                case "displayall":
+                    displaydata();
+                 break;          
+                
+                 case "Search":
+                    nm=document.getElementById("nm").value;
+                    pos=names.findIndex(x=>x==nm);
+                    if(pos!=-1){
+                        alert(`name at found ${pos}position`);
+                    }else
+                    {
+                        alert(`name at not found ${nm}`);
+                    }
+                 break;
+                     
+                    
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <form>
+    <input type="text" name="name" id="nm" placeholder="Enter name">
+    <input type="radio" name="action" id="add" value="add"><label for="add">Add</label>
+    <input type="radio" name="action" id="delete" value="delete"><label for="delete">delete</label>
+    <input type="radio" name="action" id="Modify" value="Modify"><label for="Modify">Modify</label>
+    <input type="radio" name="action" id="displayAll" value="displayAll"><label for="displayAll">displayAll</label>
+    <input type="radio" name="action" id="Search" value="Search"><label for="Search">Search</label>
+    <button type="button" name="btn" id="btn1" onclick="managedata()">Do Action</button>
+    <button type="reset" name="btn" id="btn2">Clear</button>
+
+    <div id="mydiv"></div>
+</form>
+</body>
+
+</html>

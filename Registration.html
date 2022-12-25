@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function validateName(){
+            //validate whether name contains only spacecs
+            var name=document.getElementById("nm").value;
+            if(name.trim().length>0){
+                document.getElementById("errnm").innerHTML="";
+                return true;
+            }
+            else{
+                document.getElementById("nm").innerHTML="Enter valid name";
+                return false;
+            }
+        }
+         //validate whether minimum one radio button is selected
+        function validateGender(){
+            let genarr=document.getElementsByName("gender").innerHTML;
+            for(var i=0;i<genarr.length;i++){
+                if(genarr[i].checked){
+                    document.getElementById("errgen").innerHTML="";
+                    return true;
+                }
+            }
+            document.getElementById("errgen").innerHTML="gender has to be selected";
+            return false;
+        }
+
+        function validatehobbies(){
+            var hobbyarr=document.getElementsByName("hobbies");
+            let count=0;
+            for(var i=0;i<hobbyarr.length;i++){
+                if(hobbyarr[i].checked){
+                    count++;
+                    if (count>=3){
+                         document.getElementById("errhobby").innerHTML="";
+                         return true;
+                    }
+                }
+            }
+            document.getElementById("errhobby").innerHTML="pls select minimum 3 hobbies";
+            return false
+        }
+         /// to check whether one of the city is selected or not
+         function validatecity(){
+             var selcity=document.getElementById("city");
+             var pos=selcity.selectedIndex;
+             alert(pos+"======="+selcity.options[pos].value);
+             if(pos>0)
+             {
+                document.getElementById("errcity").innerHTML="";
+                return true;
+             }
+             else{
+                document.getElementById("errcity").innerHTML="select minimum one city";
+                return false;
+             }
+
+        }
+        function validatedata(){
+            alert("validate");
+            flag=validateName();
+            flag1=validateGender();
+            flag2=validatehobbies();
+            flag3=validatecity();
+            if(flag && flag1 && flag2 && flag3)
+              return true;
+            else
+             return false;
+                }
+    </script>
+</head>
+<body>
+    <table border="2">
+        <form>
+            <tr>
+                <td>
+                    <label for="nm">Name</label>
+                </td>
+                <td>
+                    <input type="text" name="nm" id="nm" required>
+                </td>
+                <td id="errnm"></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="dt">Date</label>
+                </td>
+                <td>
+                    <input type="date" name="dt" id="dt" min="2022-11-05" max="2022-11-25">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="nm">Age</label>
+                </td>
+                <td>
+                    <input type="text" name="ag" id="ag" size="12" min="18" max="60" >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="mob">Mobile</label>
+                </td>
+                <td>
+                    <input type="number" name="mob" id="mob" size="10" mix="10" max="10" pattern="[7-9][0-9]{9}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="addr">Address</label>
+                </td>
+                <td>
+                    <textarea name="addr" id="addr" cols="25" rows="4"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="gender"> Gender</label></td>
+                <td>
+                    <input type="radio" name="gender" id="female " value="female ">
+                    <label for="female">Female</label><br>
+                    <input type="radio" name="gender" id="male " value="male ">
+                    <label for="male ">male</label>
+                </td>
+                <td id="errgen"></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="deg">Degree</label>
+                </td>
+                <td>
+                    <input type="radio" name="degree " id="BE " value="BE " >
+                    <label for="BE ">BE</label>
+                    <input type="radio" name="degree " id="Btech " value="Btech ">
+                    <label for="Btech ">Btech</label>
+                    <input type="radio" name="degree " id="MSC " value="MSC ">
+                    <label for="MSC ">MSC</label>
+                </td>
+                <td id="errdeg"></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="hb">Hobbies</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="hb" id="h1">Reading
+                    <input type="checkbox" name="hb" id="h2">biking
+                    <input type="checkbox" name="hb" id="h3">trekking
+                    <input type="checkbox" name="hb" id="h3">sleeping
+                    <input type="checkbox" name="hb" id="h3">dancing
+                </td>
+                <td id="errhobby"></td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="ct">City</label>
+                </td>
+                <td>
+                    <select name="ct" id="ct">
+                        <option value="1">----select one----</option>
+                        <option value="p">Pune</option>
+                        <option value="m">Mumbai</option>
+                        <option value="n">Nashik</option>
+                        <option value="ng">Nagpur</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <button type="button" name="btn" id="btn" value="submit">Register User</button>
+                    <button type="button" name="btn1" id="btn1" value="clear">clear Form</button>
+                    
+                </td>
+            </tr>
+            
+        </form>
+    </table>
+</body>
+</html>
